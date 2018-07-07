@@ -16,15 +16,15 @@ a nifty little Python script to improve your vocabulary.
 4. Start playing with it by 
     * $ shabdkosh 
     
-        *to get defination of random word*
+        *to get definition of random word*
         
     * $ shabdkosh <some_word> 
     
-        *to get defination of some word.*
+        *to get definition of some word.*
         
     * $ shabdkosh --history
     
-        *to get defination of word from your history.*
+        *to get definition of word from your history.*
 
 
 
