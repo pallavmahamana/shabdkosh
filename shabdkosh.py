@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 import os, sys, json, random
 import requests
@@ -92,7 +92,7 @@ def print_randomword_fromhistory():
 		print meantext
 		print "\n"
 		for i in history[randomkey]["goog"]:
-			Style.BRIGHT+Fore.YELLOW+'> '+Style.RESET_ALL+print i
+			print Style.BRIGHT+Fore.YELLOW+'> '+Style.RESET_ALL+i
 	print "\n\n"
 	f.close()
 
