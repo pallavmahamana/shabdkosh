@@ -29,6 +29,6 @@ a nifty little Python script to improve your vocabulary.
 
 # ^^ This method is Boring, I need one line script to install shabdkosh !!!
 
-'''
+```
 sudo bash -c 'wget https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/shabdkosh.py -O /usr/bin/shabdkosh && wget https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/shabdbash.py -O /usr/bin/shabdbash && echo '{}'>>/usr/bin/.shabdkosh.json && chmod +x /usr/bin/shabdkosh && chmod +x /usr/bin/shabdbash && chmod +777 /usr/bin/.shabdkosh.json && echo 'shabdbash'>>~/.bashrc && echo 'shabdbash'>>~/.zshrc && shabdkosh welcome'
-'''
+```
