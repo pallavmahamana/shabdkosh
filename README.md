@@ -7,6 +7,9 @@ a nifty little Python script to improve your vocabulary.
 
 
 # How to Setup ?
+0. Install dependencies by 
+   $ pip install -r requirements.txt
+
 1. Move this script to your /usr/bin/ ,  $ sudo mv shabdkosh.py /usr/bin/shabdkosh
 2. Give it super powers , $ sudo chmod +x /usr/bin/shabdkosh
 3. Create a empty .shabdkosh.json file for storing history. $ sudo echo '{}'>/usr/bin/.shabdkosh.json && sudo chmod +777 /usr/bin/.shabdkosh.json
