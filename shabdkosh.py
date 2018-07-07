@@ -92,7 +92,7 @@ def print_randomword_fromhistory():
 		print meantext
 		print "\n"
 		for i in history[randomkey]["goog"]:
-			print i
+			Style.BRIGHT+Fore.YELLOW+'> '+Style.RESET_ALL+print i
 	print "\n\n"
 	f.close()
 
