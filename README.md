@@ -33,5 +33,6 @@ This one big bash line will setup shabdkosh for you and will even make it show y
 
 
 ```
-sudo bash -c 'wget https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/shabdkosh.py -O /usr/bin/shabdkosh && wget https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/shabdbash.py -O /usr/bin/shabdbash && echo '{}'>>/usr/bin/.shabdkosh.json && chmod +x /usr/bin/shabdkosh && chmod +x /usr/bin/shabdbash && chmod +777 /usr/bin/.shabdkosh.json && echo 'shabdbash'>>~/.bashrc && echo 'shabdbash'>>~/.zshrc && shabdkosh welcome'
+sudo bash -c 'wget https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/shabdkosh.py -O /usr/bin/shabdkosh && wget https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/shabdbash.py -O /usr/bin/shabdbash && echo '{}'>>/usr/bin/.shabdkosh.json && chmod +x /usr/bin/shabdkosh && chmod +x /usr/bin/shabdbash && chmod +777 /usr/bin/.shabdkosh.json && echo ''>>~/.bashrc && echo ''>>~/.zshrc && echo 'shabdbash'>>~/.bashrc && echo 'shabdbash'>>~/.zshrc && shabdkosh welcome'
+
 ```
