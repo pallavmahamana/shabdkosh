@@ -24,19 +24,20 @@ $ sudo chmod +x /usr/bin/shabdkosh
 $ sudo echo '{}'>/usr/bin/.shabdkosh.json && sudo chmod +777 /usr/bin/.shabdkosh.json
 ```
 4. Start playing with it by 
-    * $ shabdkosh 
-    
-        *to get definition of random word*
+    * *to get definition of random word*
+      ```
+      $ shabdkosh
+      ```
+      
+    * $ *to get definition of some word.*
+        ```
+        $ shabdkosh <some_word>
+        ```
         
-    * $ shabdkosh <some_word> 
-    
-        *to get definition of some word.*
-        
-    * $ shabdkosh --history
-    
-        *to get definition of word from your history.*
-
-
+    * *to get definition of word from your history.*
+         ```
+         $ shabdkosh --history
+         ```
 
 
 
