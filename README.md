@@ -7,9 +7,10 @@ a nifty little Python script to improve your vocabulary.
 
 
 # How to Setup ?
-0. Install dependencies by 
+0. Install dependencies by
+```
    $ pip install -r requirements.txt
-
+```
 1. Move this script to your /usr/bin/ ,  
 ```
 $ sudo mv shabdkosh.py /usr/bin/shabdkosh
