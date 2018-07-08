@@ -58,9 +58,9 @@ def get_examples(word):
 	examples_json = requests.get("https://corpus.vocabulary.com/api/1.0/examples.json?query="+word+"&maxResults=50&startOffset=0&filter=0&_=1527055684693").json()
 	if len(examples_json['result']['sentences'])>0:
 		for i in range(len(examples_json['result']['sentences']))[:3]:                               # show first 3 example sentences
-			print examples_json['result']['sentences'][i]['sentence']
+			print examples_json['result']['sentences'][i]['sentence'].encode('utf-8')
 			if 'locator' in examples_json['result']['sentences'][i]['volume']:
-				print examples_json['result']['sentences'][i]['volume']['locator']," - ",examples_json['result']['sentences'][i]['volume']['corpus']['name']
+				print examples_json['result']['sentences'][i]['volume']['locator'].encode('utf-8')," - ",examples_json['result']['sentences'][i]['volume']['corpus']['name'].encode('utf-8')
 			print "\n"
 
 
