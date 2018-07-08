@@ -39,7 +39,7 @@ $ sudo echo '{}'>/usr/bin/.shabdkosh.json && sudo chmod +777 /usr/bin/.shabdkosh
          $ shabdkosh --history
          ```
 
-    * * more fun with lolcat :rainbow::cat:
+    * *send it to lolcat for more fun*:rainbow::cat:
          ```
          $ shabdkosh rainbow | lolcat
          ```
