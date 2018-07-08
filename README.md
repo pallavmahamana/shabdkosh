@@ -29,7 +29,7 @@ $ sudo echo '{}'>/usr/bin/.shabdkosh.json && sudo chmod +777 /usr/bin/.shabdkosh
       $ shabdkosh
       ```
       
-    * $ *to get definition of some word.*
+    * *to get definition of some word.*
         ```
         $ shabdkosh <some_word>
         ```
@@ -39,7 +39,10 @@ $ sudo echo '{}'>/usr/bin/.shabdkosh.json && sudo chmod +777 /usr/bin/.shabdkosh
          $ shabdkosh --history
          ```
 
-
+    * * more fun with lolcat :rainbow::cat:
+         ```
+         $ shabdkosh rainbow | lolcat
+         ```
 
 # ^^ This method is Boring, I need one line script to install shabdkosh !!!
 
