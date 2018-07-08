@@ -89,10 +89,10 @@ def print_randomword_fromhistory():
 					meantext+= Style.BRIGHT+Fore.GREEN+word+" "+Style.RESET_ALL
 				else:
 					meantext+= word+" "+Style.RESET_ALL
-		print meantext
+		print meantext.encode('utf-8')
 		print "\n"
 		for i in history[randomkey]["goog"]:
-			print Style.BRIGHT+Fore.YELLOW+'> '+Style.RESET_ALL+i
+			print Style.BRIGHT+Fore.YELLOW+'> '+Style.RESET_ALL+i.encode('utf-8')
 	print "\n\n"
 	f.close()
 
@@ -140,4 +140,3 @@ if __name__=='__main__':
 				get_examples(sys.argv[1])
 			else:
 				print_autocomplete(sys.argv[1])
-
