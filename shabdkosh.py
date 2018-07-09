@@ -8,20 +8,6 @@ from colorama import Fore,Back,Style,init
 init(autoreset=True)
 
 def write_history(word,meaning, googdef):
-	# resp = requests.get("https://www.vocabulary.com/dictionary/definition.ajax?search="+word+"&lang=en").text
-	# meaning = ''
-	# soup = BeautifulSoup(resp,"lxml")
-	# if soup.find("p",class_="short")!=None:
-	# 	meaning = soup.find("p",class_="short").text
-	# resp = requests.get("https://www.google.co.in/async/dictw?vet=10ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQg4MCCCgwAA..i&ved=0ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQu-gBCCwwAA&safe=off&yv=3&oq="+word+"&gs_l=dictionary-widget.1.0.0l2.81012.82436.0.84015.7.7.0.0.0.0.437.1861.2-5j1j1.7.0....0....1.64.dictionary-widget..0.7.1860....0.qABzZkKvdxY&async=term:"+word+",corpus:en,hhdr:true,hwdgt:true,wfp:true,xpnd:true,ttl:,tsl:en,ftclps:false,_id:dictionary-modules,_pms:s,_fmt:pc").content
-	# googsoup = BeautifulSoup(resp,"lxml")
-	# sen=[]
-	# if googsoup.find("div",class_="vmod") is not None:
-	# 	maindiv = googsoup.find("div",class_="lr_dct_ent")
-	# 	sen = maindiv.find_all("div",{"data-dobid":"dfn"})
-	# sen = [i.text for i in sen]
-
-	print meaning
 	with open(os.path.dirname(__file__)+"/.shabdkosh.json","r") as f:
 		history = json.load(f)
 
