@@ -51,7 +51,7 @@ def get_random_word():
 	'''
 	return requests.get("https://www.vocabulary.com/randomword.json").json()['result']
 
-def get_examples(word):
+def print_examples(word):
 	'''
 	This method gets examples of word from vocabulary.com corpus
 	'''
@@ -75,8 +75,27 @@ def google_definition(word):
 		print Style.BRIGHT+Fore.YELLOW+'> '+Style.RESET_ALL+i.text
 
 
-def get_definition(word,ln):
-	return requests.get("https://www.vocabulary.com/dictionary/definition.ajax?search="+word+"&lang="+ln)
+def print_vocab_definition(word):
+	resp = requests.get("https://www.vocabulary.com/dictionary/definition.ajax?search="+word+"&lang=en").text
+	soup = BeautifulSoup(resp,"lxml")
+	if soup.find("p",class_="short")!=None:
+		write_history(word)
+		highlight = soup.find("h1",class_="dynamictext").text
+		meaning = soup.find("p",class_="short").text.split(" ")
+		meantext = ''
+		for wrd in meaning:
+			if wrd.lower().find(highlight.lower())!=-1:
+				meantext+= Style.BRIGHT+Fore.GREEN+word+" "+Style.RESET_ALL
+			else:
+				meantext+= wrd+" "+Style.RESET_ALL
+		print meantext.encode('utf-8')
+		print "\n"
+		google_definition(word)
+		print "\n"
+		print_examples(word)
+	else:
+		print_autocomplete(word)  # print suggested words for words which doest match
+
 
 
 def print_randomword_fromhistory():
@@ -100,21 +119,7 @@ if __name__=='__main__':
 
 	if len(sys.argv)==1:
 		randomword = get_random_word()
-		print Fore.WHITE+Back.BLACK+randomword['word']+Style.RESET_ALL
-
-		soup = BeautifulSoup(get_definition(randomword['word'],randomword['lang']).text,"lxml")
-		meaning = soup.find("p",class_="short").text.split(" ")
-		meantext = ''
-		for word in meaning:
-			if word.lower().find(randomword['word'].lower())!=-1:
-				meantext+= Style.BRIGHT+Fore.GREEN+word+" "+Style.RESET_ALL
-			else:
-				meantext+= word+" "+Style.RESET_ALL
-		print meantext.encode('utf-8')
-		print "\n"
-		google_definition(randomword['word'])
-		print "\n"
-		get_examples(randomword['word'])
+		print_vocab_definition(randomword['word'])
 
 	else:
 		if sys.argv[1]=="--history":
@@ -122,21 +127,4 @@ if __name__=='__main__':
 
 
 		else:
-			print Fore.WHITE+Back.BLACK+sys.argv[1]+Style.RESET_ALL
-			soup = BeautifulSoup(get_definition(sys.argv[1],"en").text,"lxml")
-			if soup.find("p",class_="short")!=None:
-				write_history(sys.argv[1])
-				meaning = soup.find("p",class_="short").text.split(" ")
-				meantext = ''
-				for word in meaning:
-					if word.lower().find(sys.argv[1].lower())!=-1:
-						meantext+= Style.BRIGHT+Fore.GREEN+word+" "+Style.RESET_ALL
-					else:
-						meantext+= word+" "+Style.RESET_ALL
-				print meantext.encode('utf-8')
-				print "\n"
-				google_definition(sys.argv[1])
-				print "\n"
-				get_examples(sys.argv[1])
-			else:
-				print_autocomplete(sys.argv[1])
+			print_vocab_definition(sys.argv[1])
