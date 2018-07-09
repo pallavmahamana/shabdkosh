@@ -7,25 +7,26 @@ from colorama import Fore,Back,Style,init
 
 init(autoreset=True)
 
-def write_history(word):
-	resp = requests.get("https://www.vocabulary.com/dictionary/definition.ajax?search="+word+"&lang=en").text
-	meaning = ''
-	soup = BeautifulSoup(resp,"lxml")
-	if soup.find("p",class_="short")!=None:
-		meaning = soup.find("p",class_="short").text
-	resp = requests.get("https://www.google.co.in/async/dictw?vet=10ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQg4MCCCgwAA..i&ved=0ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQu-gBCCwwAA&safe=off&yv=3&oq="+word+"&gs_l=dictionary-widget.1.0.0l2.81012.82436.0.84015.7.7.0.0.0.0.437.1861.2-5j1j1.7.0....0....1.64.dictionary-widget..0.7.1860....0.qABzZkKvdxY&async=term:"+word+",corpus:en,hhdr:true,hwdgt:true,wfp:true,xpnd:true,ttl:,tsl:en,ftclps:false,_id:dictionary-modules,_pms:s,_fmt:pc").content
-	googsoup = BeautifulSoup(resp,"lxml")
-	sen=[]
-	if googsoup.find("div",class_="vmod") is not None:
-		maindiv = googsoup.find("div",class_="lr_dct_ent")
-		sen = maindiv.find_all("div",{"data-dobid":"dfn"})
-	sen = [i.text for i in sen]
+def write_history(word,meaning, googdef):
+	# resp = requests.get("https://www.vocabulary.com/dictionary/definition.ajax?search="+word+"&lang=en").text
+	# meaning = ''
+	# soup = BeautifulSoup(resp,"lxml")
+	# if soup.find("p",class_="short")!=None:
+	# 	meaning = soup.find("p",class_="short").text
+	# resp = requests.get("https://www.google.co.in/async/dictw?vet=10ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQg4MCCCgwAA..i&ved=0ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQu-gBCCwwAA&safe=off&yv=3&oq="+word+"&gs_l=dictionary-widget.1.0.0l2.81012.82436.0.84015.7.7.0.0.0.0.437.1861.2-5j1j1.7.0....0....1.64.dictionary-widget..0.7.1860....0.qABzZkKvdxY&async=term:"+word+",corpus:en,hhdr:true,hwdgt:true,wfp:true,xpnd:true,ttl:,tsl:en,ftclps:false,_id:dictionary-modules,_pms:s,_fmt:pc").content
+	# googsoup = BeautifulSoup(resp,"lxml")
+	# sen=[]
+	# if googsoup.find("div",class_="vmod") is not None:
+	# 	maindiv = googsoup.find("div",class_="lr_dct_ent")
+	# 	sen = maindiv.find_all("div",{"data-dobid":"dfn"})
+	# sen = [i.text for i in sen]
 
+	print meaning
 	with open(os.path.dirname(__file__)+"/.shabdkosh.json","r") as f:
 		history = json.load(f)
 
 	if word not in history.keys():
-		history[word]={"vocab":meaning,"goog":sen}
+		history[word]={"vocab":meaning,"goog":googdef}
 
 
 	with open(os.path.dirname(__file__)+"/.shabdkosh.json","w") as f:
@@ -64,7 +65,7 @@ def print_examples(word):
 			print "\n"
 
 
-def google_definition(word):
+def get_print_google_definition(word):
 	content = requests.get("https://www.google.co.in/async/dictw?vet=10ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQg4MCCCgwAA..i&ved=0ahUKEwiJ8eflzKbbAhUcSI8KHcfkAowQu-gBCCwwAA&safe=off&yv=3&oq="+word+"&gs_l=dictionary-widget.1.0.0l2.81012.82436.0.84015.7.7.0.0.0.0.437.1861.2-5j1j1.7.0....0....1.64.dictionary-widget..0.7.1860....0.qABzZkKvdxY&async=term:"+word+",corpus:en,hhdr:true,hwdgt:true,wfp:true,xpnd:true,ttl:,tsl:en,ftclps:false,_id:dictionary-modules,_pms:s,_fmt:pc").content
 	googsoup = BeautifulSoup(content,"lxml")
 	sen=[]
@@ -73,26 +74,27 @@ def google_definition(word):
 		sen = maindiv.find_all("div",{"data-dobid":"dfn"})
 	for i in sen:
 		print Style.BRIGHT+Fore.YELLOW+'> '+Style.RESET_ALL+i.text
+	return [i.text for i in sen]
 
 
-def print_vocab_definition(word):
+def save_print_vocab_definition(word):
 	resp = requests.get("https://www.vocabulary.com/dictionary/definition.ajax?search="+word+"&lang=en").text
 	soup = BeautifulSoup(resp,"lxml")
 	if soup.find("p",class_="short")!=None:
-		write_history(word)
 		highlight = soup.find("h1",class_="dynamictext").text
-		meaning = soup.find("p",class_="short").text.split(" ")
+		meaning = soup.find("p",class_="short").text
 		meantext = ''
-		for wrd in meaning:
+		for wrd in meaning.split(" "):
 			if wrd.lower().find(highlight.lower())!=-1:
-				meantext+= Style.BRIGHT+Fore.GREEN+word+" "+Style.RESET_ALL
+				meantext+= Style.BRIGHT+Fore.GREEN+wrd+" "+Style.RESET_ALL
 			else:
 				meantext+= wrd+" "+Style.RESET_ALL
 		print meantext.encode('utf-8')
 		print "\n"
-		google_definition(word)
+		googdef = get_print_google_definition(word)
 		print "\n"
 		print_examples(word)
+		write_history(highlight,meaning, googdef)
 	else:
 		print_autocomplete(word)  # print suggested words for words which doest match
 
@@ -119,7 +121,7 @@ if __name__=='__main__':
 
 	if len(sys.argv)==1:
 		randomword = get_random_word()
-		print_vocab_definition(randomword['word'])
+		save_print_vocab_definition(randomword['word'])
 
 	else:
 		if sys.argv[1]=="--history":
@@ -127,4 +129,4 @@ if __name__=='__main__':
 
 
 		else:
-			print_vocab_definition(sys.argv[1])
+			save_print_vocab_definition(sys.argv[1])
