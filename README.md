@@ -1,8 +1,7 @@
 ![https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/gif/shabdkosh.gif](https://raw.githubusercontent.com/pallavmahamana/shabdkosh/master/gif/shabdkosh.gif)
 
-
 # shabdkosh
-a nifty little Python script to improve your vocabulary.
+a nifty little Python2.7 script to improve your vocabulary.
 
 
 
